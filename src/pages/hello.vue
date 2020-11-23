@@ -11,7 +11,7 @@ export default {
     name: "hello",
     setup(){
         const store = useStore()
-        const val = store.state.homeId
+        const val   = store.state.homeId
         return {
             val
         }
