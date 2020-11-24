@@ -2,7 +2,7 @@ import {createStore} from 'vuex'
 
 export default createStore({
     state    : {
-        showLoading: true,
+        showLoading: false,
         homeId     : 122
     },
     getters  : {

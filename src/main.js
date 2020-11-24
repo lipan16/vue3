@@ -15,4 +15,6 @@ import App from './App.vue'
 import router from './router'
 import state from './state'
 
-createApp(App).use(Overlay).use(Cell).use(Button).use(Form).use(Field).use(VanImage).use(Tag).use(state).use(router).mount('#app')
+createApp(App)
+.use(Overlay).use(Cell).use(Button).use(Form).use(Field).use(VanImage).use(Tag)
+.use(state).use(router).mount('#app')

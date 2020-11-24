@@ -7,7 +7,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes : [{
         path     : '/',
-        name     : 'hello',
+        name     : 'Hello',
         component: () => import('../pages/hello'),
     }, {
         path     : '/login',
@@ -26,8 +26,7 @@ router.beforeEach((to, from, next) => {
     if(to.path === '/login'){
         return next()
     }
-    // 获取token
-    const tokenStr = window.sessionStorage.getItem('token')
+    const tokenStr = window.sessionStorage.getItem('token') // 获取token
     if(!tokenStr){ // 没有token 跳转登录页面
         return next('/login')
     }
