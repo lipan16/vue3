@@ -1,5 +1,5 @@
 // const MockPlugin = require('./src/mock/mock_plugin.js')
-module.exports   = {
+module.exports = {
     configureWebpack: {
         plugins: [
             // new MockPlugin({

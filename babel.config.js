@@ -4,12 +4,12 @@ module.exports = {
     ],
     plugins: [
         ['import', {
-            libraryName: 'vant',
+            libraryName     : 'vant',
             libraryDirectory: 'es',
-            style: true
+            style           : true
         }, 'vant'],
         ['component', {
-            libraryName: 'element-plus',
+            libraryName     : 'element-plus',
             styleLibraryName: 'theme-chalk'
         }]
     ]
