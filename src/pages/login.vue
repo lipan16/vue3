@@ -20,7 +20,7 @@ import {useRouter} from 'vue-router'
 export default {
     name: "login",
     setup(){
-        const router = useRouter()
+        const router  = useRouter()
         const data    = reactive({
             name     : '',
             password : '',
@@ -30,10 +30,9 @@ export default {
             return data.name === '' || data.password === ''
         })
 
-
         function login(){
             const temp = {name: data.name, password: data.password}
-            window.sessionStorage.setItem('token', JSON.stringify(temp))
+            window.localStorage.setItem('token', JSON.stringify(temp))
             router.push('/')
         }
 
