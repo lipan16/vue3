@@ -8,7 +8,7 @@ const router = createRouter({
     routes : [{
         path     : '/',
         name     : 'Hello',
-        component: () => import('../pages/hello'),
+        component: () => import('../pages/home'),
     }, {
         path     : '/login',
         name     : 'Login',
