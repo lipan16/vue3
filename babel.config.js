@@ -8,9 +8,9 @@ module.exports = {
             libraryDirectory: 'es',
             style: true
         }, 'vant'],
-        ['import', {
+        ['component', {
             libraryName: 'element-plus',
             styleLibraryName: 'theme-chalk'
-        }, 'element']
+        }]
     ]
 }
