@@ -1,12 +1,7 @@
 import {createApp} from 'vue'
 import {
-    Overlay,
-    Cell,
-    Button,
-    Image as VanImage,
-    Form,
-    Field,
-    Tag
+    Overlay, Cell, Button, Form, Field, Tag,
+    Image as VanImage
 }                  from 'vant'
 import 'vant/lib/index.css' // vant全局样式
 import '@vant/touch-emulator' // 桌面端适配
@@ -23,9 +18,9 @@ import App    from './App.vue'
 import router from './router'
 import state  from './state'
 
-const VantUI    = [Overlay, Cell, Button, VanImage, Form, Field, Tag]
+const VantUI = [Overlay, Cell, Button, VanImage, Form, Field, Tag]
 const ElementUI = [ElButton, ElMenu, ElMenuItem, ElMenuItemGroup, ElRow,
-                   ElCol, ElSubmenu, ElContainer, ElHeader, ElAside, ElMain, ElTable, ElTableColumn]
+    ElCol, ElSubmenu, ElContainer, ElHeader, ElAside, ElMain, ElTable, ElTableColumn]
 
 const app = createApp(App)
 VantUI.forEach(ui => {

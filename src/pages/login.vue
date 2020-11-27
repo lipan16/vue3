@@ -32,7 +32,7 @@ export default {
 
         function login(){
             const temp = {name: data.name, password: data.password}
-            window.localStorage.setItem('token', JSON.stringify(temp))
+            window.sessionStorage.setItem('token', JSON.stringify(temp))
             router.push('/')
         }
 
