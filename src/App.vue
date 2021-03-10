@@ -1,11 +1,9 @@
 <template>
-    <router-view></router-view>
-    <van-overlay :show="this.$store.state.showLoading"></van-overlay>
+    <router-view/>
 </template>
 
 <script>
-export default {}
+export default {
+    name: 'APP'
+}
 </script>
-
-<style lang="less" scoped>
-</style>
