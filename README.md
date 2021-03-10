@@ -1,6 +1,7 @@
-# vue3
+# 云E办 
+### springboot+vue构建中小企业在线云办公平台
 
-## Project setup
+### Project setup
 ```
 npm install
 ```
@@ -14,11 +15,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
