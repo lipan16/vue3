@@ -1,6 +1,7 @@
 <template>
     <div class="login-page">
         <el-form ref="loginForm" :model="loginForm" class="login-form" autocomplete="on">
+            <h3>系统登录</h3>
             <el-image class="avatar-img" :src="avatarImg" alt=""/>
             <el-form-item>
                 <el-input prefix-icon="el-icon-s-custom"
@@ -39,7 +40,7 @@ export default {
                 password: '',
 
             },
-            avatarImg: require('../../assets/logo.png')
+            avatarImg: require('../../../../yeb - 副本/src/assets/logo.png')
         })
 
         function login(){

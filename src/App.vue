@@ -1,9 +1,11 @@
 <template>
-    <router-view/>
+    <el-button>12</el-button>
 </template>
 
-<script>
-export default {
-    name: 'APP'
-}
+<script setup>
+
 </script>
+
+<style>
+
+</style>

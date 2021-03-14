@@ -5,14 +5,10 @@ import {
 
 const router = createRouter({
     history: createWebHistory(),
-    routes : [{
-        path     : '/',
-        name     : 'Hello',
-        component: () => import('../views/home'),
-    }, {
-        path     : '/login',
-        name     : 'Login',
-        component: () => import('../views/login/login')
+    routes: [{
+        path: '/',
+        name: 'Login',
+        component: () => import('../views/login/login.vue')
     }
     ]
 })
@@ -23,12 +19,12 @@ router.beforeEach((to, from, next) => {
     // from 代表从哪个路径跳转而来
     // next 是一个函数，表示放行 next():放行    next('/login'):强制跳转
 
-    if(to.path === '/login'){
+    if(to.path === '/'){
         return next()
     }
     const tokenStr = window.sessionStorage.getItem('token') // 获取token
     if(!tokenStr){ // 没有token 跳转登录页面
-        return next('/login')
+        return next('/')
     }
     next()
 })
