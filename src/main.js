@@ -6,4 +6,6 @@ import './style/global.less';
 import router      from "./router";
 import store       from "./store";
 
-createApp(App).use(router).use(store).use(ElementPlus).mount('#app')
+const app = createApp(App);
+
+app.use(router).use(store).use(ElementPlus).mount('#app')

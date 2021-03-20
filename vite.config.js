@@ -10,11 +10,17 @@ export default defineConfig({
         }
     },
     server: {
-        port:4000, //启动端口
-        // open: true,
+        port: 4000, //启动端口
+        // open: true, //开启浏览器
         proxy: {
-        //     // 选项写法
-        //     '/api': 'http://123.56.85.24:5000' //代理网址
+            // ws:false, //webSocket
+            '/api': {
+                target: 'http://localhost:8080/',
+                changeOrigin: true, //发送请求头host会被设置target
+                pathReWrite: {
+                    '^/': '/'
+                },
+            }, //代理
         },
         cors:true
     }

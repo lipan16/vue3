@@ -3,11 +3,11 @@ import {createStore} from 'vuex'
 export default createStore({
     state: {
         showLoading: false,
-        homeId: 122,
+        routes: [],
     },
     getters: {
-        getHomeId(state){
-            return state.homeId
+        getRoutes(state){
+            return state.routes
         },
     },
     mutations: {
@@ -16,6 +16,9 @@ export default createStore({
         },
         hideLoading(state){
             state.showLoading = false
+        },
+        initRoutes(state, data){
+            state.routes = data
         }
     },
     actions: {},

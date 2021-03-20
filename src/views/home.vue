@@ -1,70 +1,29 @@
 <template>
-    <div id="home">
+    <div class="home">
         <el-container>
-            <el-header>Header</el-header>
+            <el-header class="home-header">
+                <div class="title">云E办</div>
+                头像，个人中心，设置，注销登录
+            </el-header>
 
             <el-container class="container">
                 <el-aside width="200px">
-                    <el-col :span="24">
-                        <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-                            <el-submenu index="1">
-                                <template #title>
-                                    <i class="el-icon-location"></i>
-                                    <span>导航一</span>
-                                </template>
-                                <el-menu-item-group>
-                                    <template #title>分组一</template>
-                                    <el-menu-item index="1-1">选项1</el-menu-item>
-                                    <el-menu-item index="1-2">选项2</el-menu-item>
-                                </el-menu-item-group>
-                                <el-menu-item-group title="分组2">
-                                    <el-menu-item index="1-3">选项3</el-menu-item>
-                                </el-menu-item-group>
-                                <el-submenu index="1-4">
-                                    <template #title>选项4</template>
-                                    <el-menu-item index="1-4-1">选项1</el-menu-item>
-                                </el-submenu>
-                            </el-submenu>
-
-                            <el-menu-item index="2">
-                                <i class="el-icon-menu"></i>
-                                <template #title>导航二</template>
+                    <el-menu router unique-opened v-for="(item,index) in $router.options.routes" :key="index">
+                        <el-submenu v-if="!item.hidden">
+                            <template #title>
+                                <i :class="item.icon"></i>
+                                <span>{{ item.name }}{{ item.hidden }}</span>
+                            </template>
+                            <el-menu-item v-for="(children, indexj) in item.children" :key="indexj"
+                                          :index="children.path">
+                                {{ children.name }}
                             </el-menu-item>
-
-                            <el-menu-item index="3">
-                                <i class="el-icon-document"></i>
-                                <template #title>导航三</template>
-                            </el-menu-item>
-
-                            <el-menu-item index="4">
-                                <i class="el-icon-setting"></i>
-                                <template #title>导航四</template>
-                            </el-menu-item>
-
-                        </el-menu>
-                    </el-col>
+                        </el-submenu>
+                    </el-menu>
                 </el-aside>
 
                 <el-main>
-                    <el-table
-                        :data="tableData"
-                        stripe
-                        style="width: 100%">
-                        <el-table-column
-                            prop="date"
-                            label="日期"
-                            width="180">
-                        </el-table-column>
-                        <el-table-column
-                            prop="name"
-                            label="姓名"
-                            width="180">
-                        </el-table-column>
-                        <el-table-column
-                            prop="address"
-                            label="地址">
-                        </el-table-column>
-                    </el-table>
+                    <router-view/>
                 </el-main>
             </el-container>
 
@@ -74,29 +33,16 @@
 
 <script>
 import {reactive, toRefs} from 'vue'
+import router             from "../router";
 
 export default {
     name: "hello",
     setup(){
-        const data = reactive({
-            tableData: [{
-                date   : '2016-05-02',
-                name   : '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                date   : '2016-05-04',
-                name   : '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                date   : '2016-05-01',
-                name   : '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                date   : '2016-05-03',
-                name   : '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }]
-        })
+        const data = reactive({})
+
+        function menuClick(index){
+            router.push(index);
+        }
 
         function handleOpen(key, keyPath){
             console.log(key, keyPath)
@@ -107,45 +53,52 @@ export default {
         }
 
         return {
-            ...toRefs(data), handleOpen, handleClose
+            ...toRefs(data), menuClick, handleOpen, handleClose
         }
     }
 }
 </script>
 
 <style lang="less" scoped>
-#home {
+.home{
     position   : absolute;
     top        : 0;
     bottom     : 0;
     width      : 100%;
     text-align : center;
 
-    .el-header {
+    .home-header{
         background-color : #B3C0D1;
         color            : #333;
-        line-height      : 60PX;
+        display          : flex;
+        justify-content  : space-between;
+        align-items      : center;
+
+        .title{
+            font-size : 30px;
+
+        }
     }
 
-    .container {
+    .container{
         position : absolute;
         top      : 60PX;
         bottom   : 0px;
         width    : 100%;
 
-        .el-aside {
+        .el-aside{
             color : #333;
 
-            .el-menu-item {
+            .el-menu-item{
                 min-width : 0;
             }
         }
 
-        .el-main {
+        .el-main{
             background-color : #E9EEF3;
             color            : #333;
 
-            .el-table__row--striped {
+            .el-table__row--striped{
                 background-color : red;
             }
         }
