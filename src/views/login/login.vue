@@ -100,11 +100,11 @@ export default {
         }
         function nsav(){ //nsv按钮
 
-            // service({url: '/nav'}).then(response => {
-            //     console.log(response)
-            // }).catch(error => {
-            //     ElMessage.error(error.toString())
-            // })
+            service({url: '/nav'}).then(response => {
+                console.log(response)
+            }).catch(error => {
+                ElMessage.error(error.toString())
+            })
         }
 
 
