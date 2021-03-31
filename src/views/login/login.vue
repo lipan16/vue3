@@ -30,7 +30,6 @@
                 <img :src="captchaUrl" class="captcha-url" alt=""/>
             </el-form-item>
             <el-form-item class="login-btn">
-                <el-checkbox v-model="checked" tabindex="4">记住我</el-checkbox>
                 <el-button type="primary" @click="submitLogin">登录</el-button>
                 <el-button type="primary" @click="nsav">nav</el-button>
             </el-form-item>
@@ -45,12 +44,14 @@ import {
     reactive,
 }                  from 'vue'
 import {useRouter} from 'vue-router'
+import {useStore}  from 'vuex'
 import service     from "../../utils/request"
 
 export default {
     name: "Login",
     setup(){
         const router = useRouter()
+        const store = useStore()
         const data = reactive({
             loginForm: {
                 username: '', //用户名
@@ -59,7 +60,6 @@ export default {
             },
             loading: false, //是否正在登录
             captchaUrl: '', //验证码图片url
-            checked: true, //是否记住我
             rules: {
                 username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
                 password: [{required: true, message: '请输入密码', trigger: 'blur'}],
@@ -84,12 +84,14 @@ export default {
             //         return false;
             //     }
             // })
-            const temp = {username: data.loginForm.username, password: data.loginForm.password}
-
+            const temp = {
+                username: data.loginForm.username,
+                password: data.loginForm.password,
+                captcha: data.loginForm.captcha
+            }
             service({url: '/login', method: 'post', data: temp}).then(response => {
-                if(data.checked){
-                    window.localStorage.setItem(response.data.username, response.data.token)
-                }
+                store.commit('saveUserInfo', response.data)
+                window.localStorage.setItem("token", response.data.token)
                 ElMessage.info('登录成功')
                 router.replace('/home')
             }).catch(error => {
@@ -98,8 +100,8 @@ export default {
                 data.loading = false
             })
         }
-        function nsav(){ //nsv按钮
 
+        function nsav(){ //nsv按钮
             service({url: '/nav'}).then(response => {
                 console.log(response)
             }).catch(error => {

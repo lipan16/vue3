@@ -4,11 +4,15 @@ export default createStore({
     state: {
         showLoading: false,
         routes: [],
+        userInfo: {},
     },
     getters: {
         getRoutes(state){
             return state.routes
         },
+        getUserInfo(state){
+            return state.userInfo
+        }
     },
     mutations: {
         showLoading(state){
@@ -17,10 +21,15 @@ export default createStore({
         hideLoading(state){
             state.showLoading = false
         },
-        initRoutes(state, data){
-            state.routes = data
+        addRoute(state, data){ //添加
+            state.routes.push(data)
+        },
+        saveUserInfo(state, userInfo){ //保存用户信息
+            state.userInfo = userInfo
         }
     },
-    actions: {},
+    actions: {
+
+    },
     modules: {}
 })
