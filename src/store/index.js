@@ -4,6 +4,7 @@ export default createStore({
     state: {
         showLoading: false,
         routes: [],
+        routesId: [],
         userInfo: {},
     },
     getters: {
@@ -22,6 +23,7 @@ export default createStore({
             state.showLoading = false
         },
         addRoute(state, data){ //添加
+            state.routesId.push(data.meta.id)
             state.routes.push(data)
         },
         saveUserInfo(state, userInfo){ //保存用户信息

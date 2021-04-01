@@ -4,7 +4,7 @@
             <el-header class="home-header">
                 <div class="title">云E办</div>
                 <el-dropdown @command="handleCommand">
-                    <el-avatar src=""></el-avatar>
+                    <el-avatar src="/src/assets/avatar-default.svg"></el-avatar>
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item command="center" icon="el-icon-s-custom">个人中心</el-dropdown-item>
@@ -18,11 +18,11 @@
 
             <el-container class="container">
                 <el-aside width="200px">
-                    <el-menu router unique-opened v-for="(item,index) in routers" :key="index">
-                        <el-submenu index="1" v-if="!item.enabled">
+                    <el-menu router unique-opened v-for="(item,index) in $router.options.routes" :key="index">
+                        <el-submenu :index="item.meta.id+''" v-if="!item.enabled">
                             <template #title>
-                                <i :class="item.icon"></i>
-                                <span>{{ item.name }}{{ item.hidden }}</span>
+                                <i :class="item.meta.icon"></i>
+                                <span>{{ item.name }}</span>
                             </template>
                             <el-menu-item v-for="(children, j) in item.children" :key="j"
                                           :index="children.path">
@@ -52,8 +52,13 @@ export default {
         const store = useStore()
         const data = reactive({})
         const routers = computed(() => {
-            return router.getRoutes().splice(2)
-            // return store.state.routers
+            let routes = []
+            router.getRoutes().forEach(each => {
+                if(store.state.routesId.includes(each.meta.id)){
+                    routes.push(each)
+                }
+            })
+            return routes
         })
 
         function handleCommand(index){

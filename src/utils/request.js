@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios      from 'axios';
 
 let baseURL = "/api";
 const service = axios.create({
@@ -9,15 +9,15 @@ const service = axios.create({
     }
 });
 
+
 // 发起请求之前的拦截器
 service.interceptors.request.use(
     config => {
         // 如果有token 就携带tokon
-        const token = window.localStorage.getItem("lipan");
+        const token = window.localStorage.getItem("token");
         if(token){
             config.headers.Authorization = token;
         }
-        console.log(config)
         return config;
     },
     error => Promise.reject(error)
@@ -38,15 +38,16 @@ service.interceptors.response.use(
             if(response.data.flags === 1008){ //token过期
                 if(!refreshing){ // 正在刷新token操作，挂起其他请求
                     refreshing = true
-                    return service.post('/refreshToken').then(response => {
+                    return service.post('/refreshToken', {username: 'lipan',userid: 1}).then(response => {
                         let token = response.data.token
-                        window.localStorage.setItem(response.data.username, token)
+                        window.localStorage.setItem("token", token)
                         service.config.headers.Authorization = token
                         requests.forEach(cb => cb(token))
                         requests = []
                         return service
                     }).catch(error => {
-                        return Promise.reject(new Error('刷新token失败，请重新登录'))
+                        // router.replace('/')
+                        // return Promise.reject(new Error('刷新token失败，请重新登录'))
                     }).finally(() => {
                         refreshing = false
                     })
