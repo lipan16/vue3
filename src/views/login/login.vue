@@ -42,15 +42,16 @@ import {ElMessage} from "element-plus";
 import {
     toRefs, ref,
     reactive,
-}                  from 'vue'
-import {useRouter} from 'vue-router'
-import {useStore}  from 'vuex'
+}                            from 'vue'
+import {useRoute, useRouter} from 'vue-router'
+import {useStore}            from 'vuex'
 import service     from "../../utils/request"
 
 export default {
     name: "Login",
     setup(){
-        const router = useRouter()
+        const route = useRoute() //当前的路由信息,包含URL解析得到的信息，路径，参数，query对象
+        const router = useRouter() //全局路由的实例,有push，go，replace方法
         const store = useStore()
         const data = reactive({
             loginForm: {
@@ -92,8 +93,10 @@ export default {
             service({url: '/login', method: 'post', data: temp}).then(response => {
                 store.commit('saveUserInfo', response.data)
                 window.localStorage.setItem("token", response.data.token)
+                window.localStorage.setItem("user", JSON.stringify(response.data))
                 ElMessage.info('登录成功')
-                router.replace('/home')
+                let path = route.query.redirect;
+                router.replace(path === '/' || path === undefined ? '/home' : path)
             }).catch(error => {
                 ElMessage.error(error.toString())
             }).finally(() => {

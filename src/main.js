@@ -1,27 +1,12 @@
 import {createApp} from 'vue'
 import App         from './App.vue'
-import router      from "./router";
-import store       from "./store";
-import './style/global.less';
-import ElementPlus from './utils/elementPlus'
-import {initMenu}  from "./utils/menus";
-
-
-// 挂载路由导航守卫
-router.beforeEach((to, from, next) => {
-    const tokenStr = window.localStorage.getItem('token') // 获取token
-    if(tokenStr){
-        // initMenu(router, store) // 初始化菜单
-        next()
-    }else{// 没有token 跳转登录页面
-        if(to.path === '/'){
-            next()
-        }else{
-            next('/?redirect=' + to.path);
-        }
-    }
-})
-
+import router      from './router'
+import store       from './store'
+import ElementPlus from 'element-plus'
+import 'element-plus/lib/theme-chalk/index.css'
+import './style/global.less'
+// import vant from 'vant'
+// import 'vant/lib/index.less'
 
 const app = createApp(App);
 
